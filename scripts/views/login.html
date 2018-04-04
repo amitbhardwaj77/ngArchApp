@@ -1,0 +1,20 @@
+<form name="loginForm">
+<div ng-controller="loginController as loginCtrl">
+	<div class="text-center"><h1>Login Page</h1></div>
+    <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="email" placeholder="Enter Username" name="uname" ng-minlength="6" ng-model="uname" required>
+    <p ng-if="loginForm.uname.$error.valid">Error aayi teri mail ch bharava</p>
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" ng-minlength="6" ng-model="psw" required>
+    <p ng-if="loginForm.psw.$error.valid">password taan pao biba ji</p>
+    <button ng-disabled="!loginForm.$valid" type="submit" ng-click="loginCtrl.navigateToMain()">Login</button>
+   
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Reset</button>
+    <span class="psw">Forgot password?</span>
+  </div>
+</div>
+</form>

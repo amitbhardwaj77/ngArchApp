@@ -1,0 +1,54 @@
+<div ng-controller="mainCtrl as main">
+
+  
+  <form name="myForm">
+   
+  <h1>InOrganic Table</h1><br>
+  
+ <table class="table">
+    <thead>
+      <tr>
+        <th>Company Name</th>
+        <th>Target Amount</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody ng-repeat="item in companyList">
+      <tr>
+        <td ng-bind="item.companyName"></td>
+        <td ng-bind="item.target"></td>
+        <td ng-bind="item.status"></td>
+        <td><button ng-click="main.editRow(item,$index)">Edit</button></td>
+        <td><button ng-click="main.deleteRow()">Delete</button></td>
+      </tr>     
+    </tbody>
+  </table>
+</form>
+<button ng-click="main.createRow()">Create New Row</button>
+
+<div ng-if="main.showCreate">
+  <form name="addRow">
+  <table calss="table">
+    <tr>
+      <td>Company Name :</td>
+      <td><input type="text" ng-model="main.companyName" required /></td>
+    </tr>
+    <tr>
+      <td>Target :</td>
+      <td><input type="text" ng-model="main.target" required /></td>
+    </tr>
+    <tr>
+      <td>Status :</td>
+      <td>
+        <select ng-model="main.status">
+          <option ng-repeat="status in main.statusList" ng-value="status.name">{{::status.name}}</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+</form>
+<button ng-if="!main.update" ng-click="main.addRow()" ng-disabled="!addRow.$valid">Add</button>
+<button ng-if="main.update" ng-click="main.addRow(true)" ng-disabled="!addRow.$valid">Update</button>
+</div> 
+
+</div>
