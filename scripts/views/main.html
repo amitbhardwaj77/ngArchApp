@@ -19,7 +19,7 @@
         <td ng-bind="item.target"></td>
         <td ng-bind="item.status"></td>
         <td><button ng-click="main.editRow(item,$index)">Edit</button></td>
-        <td><button ng-click="main.deleteRow()">Delete</button></td>
+        <td><button ng-click="main.deleteRow($index)">Delete</button></td>
       </tr>     
     </tbody>
   </table>

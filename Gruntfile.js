@@ -8,11 +8,21 @@ module.exports = function (grunt) {
 		'grunt-contrib-copy',
 		'grunt-contrib-concat',
 		'grunt-karma',
-		'grunt-http-server'
+		'grunt-http-server',
+		'grunt-contrib-less'
 		];
 
 
 	//grunt tasks
+	var serve = [
+		'clean',
+		'copy',
+		'less',
+		'ngtemplates',
+		'concat',
+		'injector',
+		'http-server'
+		];
 	var test = [
 		'clean',
 		'copy',
@@ -21,15 +31,6 @@ module.exports = function (grunt) {
 		'injector',
 		'karma'
 		];
-
-	var server= [
-		'clean',
-		'copy',
-		'ngtemplates',
-		'concat',
-		'injector',
-		'http-server'
-	];
 
 	//inject scripts
 	var transformScript = function(replacement) {
@@ -128,18 +129,23 @@ module.exports = function (grunt) {
 			    files: {
 			      '.tmp/index.html': ['.tmp/concat/**/*.js']
 			    }
-  			},
-  			Ed: {
-    			options: {
-    				starttag:'<!-- injector:Ed -->',
-	      			transform: transformScript('/.tmp/'),
-	      			template: '.tmp/index.html'
-    			},
-			    files: {
-			      '.tmp/index.html': ['.tmp/ExternalDependecies/dependencies/**/*.js']
-			    }
   			}
+  		},
+  		less: {
+		  development: {
+		  	options:{
+		  		paths:['styles/'],
+		  		cleancss: true
+		  	},
+		  	files : [ {
+      			expand : true,
+      			cwd : "./styles",
+      			src: "**/*.less",
+      			dest : "./.tmp/styles",
+      			ext : ".css"
+    		} ]
   		}
+	}
 	};
 
 	
@@ -147,7 +153,7 @@ module.exports = function (grunt) {
 	//configure grunt
 	grunt.initConfig(configJson);
 	//register grunt tasks
-	grunt.registerTask('serve', server);
+	grunt.registerTask('serve', serve);
 	grunt.registerTask('test', test);
 
 	//load npm tasks
