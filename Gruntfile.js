@@ -13,16 +13,23 @@ module.exports = function (grunt) {
 
 
 	//grunt tasks
-	var serve = [
+	var test = [
+		'clean',
+		'copy',
+		'ngtemplates',
+		'concat',
+		'injector',
+		'karma'
+		];
+
+	var server= [
 		'clean',
 		'copy',
 		'ngtemplates',
 		'concat',
 		'injector',
 		'http-server'
-		];
-
-		var test = ['karma'];
+	];
 
 	//inject scripts
 	var transformScript = function(replacement) {
@@ -140,7 +147,7 @@ module.exports = function (grunt) {
 	//configure grunt
 	grunt.initConfig(configJson);
 	//register grunt tasks
-	grunt.registerTask('serve', serve);
+	grunt.registerTask('serve', server);
 	grunt.registerTask('test', test);
 
 	//load npm tasks
